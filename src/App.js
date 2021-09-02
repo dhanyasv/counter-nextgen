@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { useEffect, useRef ,useState } from 'react';
 import './App.css';
 
 function App() {
+  const [counter,setCounter] = useState(0)
+  const btnRef = useRef(null);
+  useEffect(() => {
+    window.addEventListener('click', (event) => {
+      if (btnRef.current && !btnRef.current.contains(event.target)) {
+        setCounter((prevCount) => prevCount + 1 )
+      }
+
+    });
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      <div className="counter-container">
+            { 
+            counter.toString().split('')
+            .map((a,index)=>{
+              return(<div className="counter" key={index}>{a}</div>)
+            })}
+      </div> 
+      <button className="counter-reset-btn" 
+              ref={btnRef}
+              onClick={() => setCounter(0)}>
+                Reset
+      </button>     
     </div>
   );
 }
