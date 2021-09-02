@@ -18,8 +18,8 @@ function App() {
       <div className="counter-container">
             { 
             counter.toString().split('')
-            .map((a,index)=>{
-              return(<div className="counter" key={index}>{a}</div>)
+            .map((count,index)=>{
+              return(<div className="counter" key={index}>{count}</div>)
             })}
       </div> 
       <button className="counter-reset-btn" 
